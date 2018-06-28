@@ -1,18 +1,23 @@
 'use strict'
 
 const Consumer = require('@mojaloop/central-services-shared').Kafka.Consumer
+const Producer = require('@mojaloop/central-services-shared').Kafka.Producer
 // const ConsumerEnums = require('@mojaloop/central-services-shared').Kafka.Consumer.ENUMS
 const Logger = require('@mojaloop/central-services-shared').Logger
 
 const createConsumer = async (topicList, consumeFunction, config) => {
   Logger.debug('createConsumer::start')
   Logger.log('createConsumer::- Instantiate consumer')
+
+  // set the logger
+  config.logger = Logger
+
   var c = new Consumer(topicList, config)
 
-  Logger.debug('createConsumer::- Connect consumer')
+  Logger.info('createConsumer::- Connecting...')
   var connectionResult = await c.connect()
 
-  Logger.debug(`createConsumer::- Connected result=${connectionResult}`)
+  Logger.info(`createConsumer::- Connected result=${connectionResult}`)
 
   Logger.debug('createConsumer::- Consume messages')
 
@@ -29,4 +34,21 @@ const createConsumer = async (topicList, consumeFunction, config) => {
   return c
 }
 
+const createProducer = async (config) => {
+  Logger.debug('createProducer::start')
+
+  // set the logger
+  config.logger = Logger
+
+  var p = new Producer(config)
+
+  Logger.info('createProducer::- Connecting...')
+  var connectionResult = await p.connect()
+  Logger.info(`createProducer::- Connected result=${connectionResult}`)
+
+  Logger.debug('createProducer::end')
+  return p
+}
+
 exports.createConsumer = createConsumer
+exports.createProducer = createProducer

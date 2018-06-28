@@ -17,6 +17,9 @@
   },
   "homepage": "https://github.com/mdebarros/kafkapoc#readme",
   "dependencies": {
-    "@mojaloop/central-services-shared": "^1.2.1-snapshot"
+    "@mojaloop/central-services-shared": "^1.2.1-snapshot",
+    "microseconds": "^0.1.0",
+    "mustache": "^2.3.0",
+    "uuid": "^3.3.0"
   }
 }
