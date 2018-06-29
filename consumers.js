@@ -46,8 +46,8 @@ const consumeFunction1 = async (error, messages) => {
         })
       } else {
         // c.commitMessage(message)
-        Logger.info(`Processing a single message #${messageProcessingCount}`)
-        message = messages
+        Logger.info(`Processing a single message`)
+        var message = messages
         var metricStartPayload = parseInt(message.value.content.metrics.start)
         var metricStartKafkaRead = parseInt(message.timestamp)
 
