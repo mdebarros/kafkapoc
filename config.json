@@ -20,6 +20,8 @@
         "client.id": "consumer1",
         "group.id": "group1",
         "metadata.broker.list": "localhost:9092",
+        "queue.buffering.max.messages": 100,
+        "queue.buffering.max.ms": 50,
         "enable.auto.commit": true
       },
       "topicConf": {
