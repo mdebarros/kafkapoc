@@ -46,6 +46,12 @@ jspm_packages
 
 .npmrc
 
+# 0x Profiler
+/*0x*/
+
+# random files
+*.txt
+
 # --------------- #
 # IntelliJ #
 # --------------- #

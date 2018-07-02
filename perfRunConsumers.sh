@@ -14,6 +14,8 @@ echo "Starting Consumers"
 echo "*** Press CTRL+C once Consumer is finished! ***"
 echo "---------------------------------------------------------------------"
 
-node consumers.js > $LOG_FILE_CONSUMERS_JS &
+NODE_ENV=production
+
+node --prof --log-timer-events consumers.js > $LOG_FILE_CONSUMERS_JS &
 
 tail -1000f $LOG_FILE_CONSUMERS_JS

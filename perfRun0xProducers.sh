@@ -15,6 +15,6 @@ echo "---------------------------------------------------------------------"
 
 NODE_ENV=production
 
-node --prof --log-timer-events producers.js $MESSAGES_BATCH_SIZE  > $LOG_FILE_PRODUCER_JS
+0x --output-dir perf0xProducer producers.js $MESSAGES_BATCH_SIZE > $LOG_FILE_PRODUCER_JS &
 
 tail -1000f $LOG_FILE_PRODUCER_JS
