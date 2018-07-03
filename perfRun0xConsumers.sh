@@ -16,6 +16,6 @@ echo "---------------------------------------------------------------------"
 
 NODE_ENV=production
 
-0x --output-dir perf0xConsumer consumers.js > $LOG_FILE_CONSUMERS_JS &
+0x --output-dir $DIR_PERF0X_CONSUMERS consumers.js > $LOG_FILE_CONSUMERS_JS &
 
 tail -1000f $LOG_FILE_CONSUMERS_JS
