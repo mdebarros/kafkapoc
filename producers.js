@@ -29,9 +29,9 @@ var runProducer = async (messageNum = 1) => {
     }
 
     var message= JSON.parse(Mustache.render(Config.templates.messages[0], messageValues))
-    Logger.info(`Sending message ${i} - ${JSON.stringify(message)}`)
+    Logger.info(`Sending message ${i+1} - ${JSON.stringify(message)}`)
     var result = await p1.sendMessage(message, topicConf)
-    Logger.info(`Message[${i}] sent with result: ${result}`)
+    Logger.info(`Message[${i+1}] sent with result: ${result}`)
   }
 
   p1.disconnect()
