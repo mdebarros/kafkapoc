@@ -2,6 +2,7 @@
 logs
 *.log
 npm-debug.log*
+*.out
 .[Dd][Ss]_[Ss]tore
 
 # Ignore test results
@@ -44,6 +45,13 @@ jspm_packages
 .vscode
 
 .npmrc
+
+# 0x Profiler
+/*0x*/
+/old/
+
+# random files
+*.txt
 
 # --------------- #
 # IntelliJ #

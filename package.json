@@ -15,5 +15,11 @@
   "bugs": {
     "url": "https://github.com/mdebarros/kafkapoc/issues"
   },
-  "homepage": "https://github.com/mdebarros/kafkapoc#readme"
+  "homepage": "https://github.com/mdebarros/kafkapoc#readme",
+  "dependencies": {
+    "@mojaloop/central-services-shared": "2.0.0-snapshot-perf",
+    "microseconds": "^0.1.0",
+    "mustache": "^2.3.0",
+    "uuid": "^3.3.0"
+  }
 }

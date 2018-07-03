@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+export suffix=20180704T10h20
+export DOCKER_ID=kafkaperftest
+export LOG_FILE_CONSUMERS_JS="consumers_js-${suffix}.out"
+export LOG_FILE_PRODUCER_JS="producers_js-${suffix}.out"
+export SLEEP_FACTOR_IN_SECONDS=5
+export MESSAGES_BATCH_SIZE=500
+export DIR_PERF0X_PRODUCERS="perf0xProducer-${suffix}"
+export DIR_PERF0X_CONSUMERS="perf0xConsumer-${suffix}"
