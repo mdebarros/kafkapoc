@@ -1,5 +1,7 @@
 ## kafkaPoc
 
+Proof of concept to analyse Performance Bottlenecks & Issues within the Mojaloop Common Message Streaming Library and underlying dependencies.
+
 ### Results
 
 - [Published Results](https://mdebarros.github.io/kafkapoc-results)
