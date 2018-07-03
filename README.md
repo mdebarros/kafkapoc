@@ -28,7 +28,11 @@ In the directory for the kafkaPoc run the following command:
 
 Edit the `config.json` for Node Producer & Consumer options.
 
-#### 2. Scripts
+#### 2. Env Vars for Scripts
+
+Edit the `perfEnv.sh` file.
+
+#### 3. Scripts
 
 `perfEnv.sh`: Env variables for scripts
 
@@ -49,10 +53,6 @@ Edit the `config.json` for Node Producer & Consumer options.
 `perfPrintConsumerResults.sh`: Script to print Per4j output for the Consumer
 
 `perfPrintProducerResults.sh`: Script to print Per4j output for the Producer
-
-#### 3. Env Vars for Scripts
-
-Edit the `perfEnv.sh` file.
 
 #### 4. Tick Processor to understand the Profiler dump
 
