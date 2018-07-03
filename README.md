@@ -1,10 +1,34 @@
 ## kafkaPoc
 
-### Config NodeJs
+### Results
+
+- [Published Results](https://mdebarros.github.io/kafkapoc-results)
+- [Raw Results](https://github.com/mdebarros/kafkapoc-results)
+
+### Setup
+
+#### 1. @mojaloop/central-services-shared@2.0.0-snapshot-perf
+
+Clone the following branch: [https://github.com/mdebarros/central-services-shared/tree/feature/perfAnalysis](https://github.com/mdebarros/central-services-shared/tree/feature/perfAnalysis)
+
+In the directory run the following commands:
+- `npm build`
+- `npm install`
+- `npm link`
+
+#### 2. Link the local build to your kafkaPoc project
+
+In the directory for the kafkaPoc run the following command:
+- `npm link @mojaloop/central-services-shared@2.0.0-snapshot-perf`
+- `npm build`
+
+### Starting kafkaPoc
+
+#### 1. Config NodeJs
 
 Edit the `config.json` for Node Producer & Consumer options.
 
-### Scripts
+#### 2. Scripts
 
 `perfEnv.sh`: Env variables for scripts
 
@@ -26,11 +50,11 @@ Edit the `config.json` for Node Producer & Consumer options.
 
 `perfPrintProducerResults.sh`: Script to print Per4j output for the Producer
 
-#### Env Vars for Scripts
+#### 3. Env Vars for Scripts
 
 Edit the `perfEnv.sh` file.
 
-### Tick Processor to understand the Profiler dump
+#### 4. Tick Processor to understand the Profiler dump
 
 Run the following command on the Profiler dump:
 
