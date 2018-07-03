@@ -42,4 +42,6 @@ Where `$PROF_FILE` = `isolate-<#>v8.log`
 
 - NodeJS Standard Profiler: https://nodejs.org/en/docs/guides/simple-profiling/ 
 - 0x Profiler: https://www.npmjs.com/package/0x
-- Kafka Configuration Doc for `rdkafka`: https://github.com/edenhill/librdkafka/blob/0.11.1.x/CONFIGURATION.md
+- Kafka Configuration Doc for `rdkafka`: 
+    - https://github.com/edenhill/librdkafka/blob/master/INTRODUCTION.md#configuration
+    - https://github.com/edenhill/librdkafka/blob/0.11.1.x/CONFIGURATION.md
