@@ -14,15 +14,15 @@ Proof of concept to analyse Performance Bottlenecks & Issues within the Mojaloop
 Clone the following branch: [https://github.com/mdebarros/central-services-shared/tree/feature/perfAnalysis](https://github.com/mdebarros/central-services-shared/tree/feature/perfAnalysis)
 
 In the directory run the following commands:
-- `npm build`
-- `npm install`
-- `npm link`
+- `$ npm build`
+- `$ npm install`
+- `$ npm link`
 
 #### 2. Link the local build to your kafkaPoc project
 
 In the directory for the kafkaPoc run the following command:
-- `npm link @mojaloop/central-services-shared@2.0.0-snapshot-perf`
-- `npm build`
+- `$ npm link @mojaloop/central-services-shared@2.0.0-snapshot-perf`
+- `$ npm build`
 
 ### Starting kafkaPoc
 
@@ -63,6 +63,40 @@ Run the following command on the Profiler dump:
 `$ node --prof-process $PROF_FILE > processed-dump.txt`
 
 Where `$PROF_FILE` = `isolate-<#>v8.log`
+
+#### 5. End-to-end Processing Metrics
+
+5.1. Install loadTestingParser.js dependencies
+    
+Commands:
+
+- `$ cd ./tools`    
+- `$ npm install`
+- `$ cd ..`
+
+5.2. Combined Producer and Consumer logs into sorted and filtered output: 
+
+Command:
+`$ grep  -h ".*guid=.*" *_js-*.out | sort > {OUTPUTFILE}`
+
+5.3. Run loadTestingParser.js 
+
+Command:
+`$ node ./tools/loadTestingParser.js -n 2 -f {OUTPUTFILE}`
+
+Example output:
+```bash
+$ node ./tools/loadTestingParser.js -n 2 -f {OUTPUTFILE}
+First request: 2018-07-04T17:08:39.930Z
+Last request: 2018-07-04T17:08:43.872Z
+Total number of lines in log file: 2000
+Number of unique matched entries: 1000
+Total difference of all requests in seconds: 3.942
+Shortest response time in second: 0.215
+Longest response time in second: 3.156
+The average transaction in second: 1.621445
+Average transactions per second: 253.67833587011668
+```
 
 ### References
 

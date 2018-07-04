@@ -32,17 +32,18 @@ const consumeFunction1 = async (error, messages) => {
       if (Array.isArray(messages) && messages.length != null && messages.length > 0) {
         Logger.info(`Processing a message batch of size ${messages.length}`)
         for( let message of messages) {
+          id = message.value.content.id
           c1.commitMessageSync(message)
           var metricStartPayload = parseInt(message.value.content.metrics.start)
           var metricStartKafkaRead = parseInt(message.timestamp)
 
           var metricEndNow = (new Date()).getTime()
+          Logger.info(`guid=${id}:uuid - receivedMessage:process`)
 
           var metricTimeDiffFromMessageSendToEnd = metricEndNow - metricStartPayload
           var metricTimeDiffFromMessageSendToDropoff = metricStartKafkaRead - metricStartPayload
           var metricTimeDiffFromDropoffToEnd = metricEndNow - metricStartKafkaRead
 
-          id = message.value.content.id
           Perf4js.info(id, metricTimeDiffFromMessageSendToDropoff, 'metricTimeDiffFromMessageSendToDropoff')
           Perf4js.info(id, metricTimeDiffFromMessageSendToEnd, 'metricTimeDiffFromMessageSendToEnd')
           Perf4js.info(id, metricTimeDiffFromDropoffToEnd, 'metricTimeDiffFromDropoffToEnd')
