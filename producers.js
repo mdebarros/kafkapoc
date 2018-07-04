@@ -24,7 +24,8 @@ var runProducer = async (messageNum = 1) => {
 
   for(var i = 0; i <  messageNum; i++){
     var messageValues = {
-      id: uuidv4(),
+      // id: uuidv4(),
+      id: i+1,
       start: (new Date()).getTime()
     }
 

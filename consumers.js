@@ -10,6 +10,7 @@ const config1 = Config.consumers[0]
 
 const topics1 = Config.kafka.topics
 
+let c1
 // const sleep = (ms) => {
 //   var unixtime_ms = new Date().getTime()
 //   while(new Date().getTime() < unixtime_ms + ms) {}
@@ -18,6 +19,7 @@ const topics1 = Config.kafka.topics
 const consumeFunction1 = async (error, messages) => {
   return new Promise((resolve, reject) => {
     var metricStartNow = (new Date()).getTime()
+    var id = 0
     if (error) {
       Logger.info(`Error consuming message - ${error}`)
       reject(error)
@@ -29,8 +31,8 @@ const consumeFunction1 = async (error, messages) => {
       // lets check if we have received a batch of messages or single. This is dependant on the Consumer Mode
       if (Array.isArray(messages) && messages.length != null && messages.length > 0) {
         Logger.info(`Processing a message batch of size ${messages.length}`)
-        messages.forEach(message => {
-          // c.commitMessage(msg)
+        for( let message of messages) {
+          c1.commitMessageSync(message)
           var metricStartPayload = parseInt(message.value.content.metrics.start)
           var metricStartKafkaRead = parseInt(message.timestamp)
 
@@ -40,14 +42,35 @@ const consumeFunction1 = async (error, messages) => {
           var metricTimeDiffFromMessageSendToDropoff = metricStartKafkaRead - metricStartPayload
           var metricTimeDiffFromDropoffToEnd = metricEndNow - metricStartKafkaRead
 
-          Perf4js.info(metricStartPayload, metricTimeDiffFromMessageSendToDropoff, 'metricTimeDiffFromMessageSendToDropoff')
-          Perf4js.info(metricStartPayload, metricTimeDiffFromMessageSendToEnd, 'metricTimeDiffFromMessageSendToEnd')
-          Perf4js.info(metricStartPayload, metricTimeDiffFromDropoffToEnd, 'metricTimeDiffFromDropoffToEnd')
-        })
+          id = message.value.content.id
+          Perf4js.info(id, metricTimeDiffFromMessageSendToDropoff, 'metricTimeDiffFromMessageSendToDropoff')
+          Perf4js.info(id, metricTimeDiffFromMessageSendToEnd, 'metricTimeDiffFromMessageSendToEnd')
+          Perf4js.info(id, metricTimeDiffFromDropoffToEnd, 'metricTimeDiffFromDropoffToEnd')
+          // Perf4js.info(metricStartPayload, metricTimeDiffFromMessageSendToDropoff, 'metricTimeDiffFromMessageSendToDropoff')
+          // Perf4js.info(metricStartPayload, metricTimeDiffFromMessageSendToEnd, 'metricTimeDiffFromMessageSendToEnd')
+          // Perf4js.info(metricStartPayload, metricTimeDiffFromDropoffToEnd, 'metricTimeDiffFromDropoffToEnd')
+        }
+        // messages.forEach(message => {
+        //   // c.commitMessage(msg)
+        //   c1.commitMessageSync(message)
+        //   var metricStartPayload = parseInt(message.value.content.metrics.start)
+        //   var metricStartKafkaRead = parseInt(message.timestamp)
+        //
+        //   var metricEndNow = (new Date()).getTime()
+        //
+        //   var metricTimeDiffFromMessageSendToEnd = metricEndNow - metricStartPayload
+        //   var metricTimeDiffFromMessageSendToDropoff = metricStartKafkaRead - metricStartPayload
+        //   var metricTimeDiffFromDropoffToEnd = metricEndNow - metricStartKafkaRead
+        //
+        //   Perf4js.info(metricStartPayload, metricTimeDiffFromMessageSendToDropoff, 'metricTimeDiffFromMessageSendToDropoff')
+        //   Perf4js.info(metricStartPayload, metricTimeDiffFromMessageSendToEnd, 'metricTimeDiffFromMessageSendToEnd')
+        //   Perf4js.info(metricStartPayload, metricTimeDiffFromDropoffToEnd, 'metricTimeDiffFromDropoffToEnd')
+        // })
       } else {
-        // c.commitMessage(message)
-        Logger.info(`Processing a single message`)
         var message = messages
+        // c.commitMessage(message)
+        c1.commitMessageSync(message)
+        Logger.info(`Processing a single message`)
         var metricStartPayload = parseInt(message.value.content.metrics.start)
         var metricStartKafkaRead = parseInt(message.timestamp)
 
@@ -56,14 +79,18 @@ const consumeFunction1 = async (error, messages) => {
         var metricTimeDiffFromMessageSendToEnd = metricEndNow - metricStartPayload
         var metricTimeDiffFromMessageSendToDropoff = metricStartKafkaRead - metricStartPayload
         var metricTimeDiffFromDropoffToEnd = metricEndNow - metricStartKafkaRead
-
-        Perf4js.info(metricStartPayload, metricTimeDiffFromMessageSendToDropoff, 'metricTimeDiffFromMessageSendToDropoff')
-        Perf4js.info(metricStartPayload, metricTimeDiffFromMessageSendToEnd, 'metricTimeDiffFromMessageSendToEnd')
-        Perf4js.info(metricStartPayload, metricTimeDiffFromDropoffToEnd, 'metricTimeDiffFromDropoffToEnd')
+        id = message.value.content.id
+        Perf4js.info(id, metricTimeDiffFromMessageSendToDropoff, 'metricTimeDiffFromMessageSendToDropoff')
+        Perf4js.info(id, metricTimeDiffFromMessageSendToEnd, 'metricTimeDiffFromMessageSendToEnd')
+        Perf4js.info(id, metricTimeDiffFromDropoffToEnd, 'metricTimeDiffFromDropoffToEnd')
+        // Perf4js.info(metricStartPayload, metricTimeDiffFromMessageSendToDropoff, 'metricTimeDiffFromMessageSendToDropoff')
+        // Perf4js.info(metricStartPayload, metricTimeDiffFromMessageSendToEnd, 'metricTimeDiffFromMessageSendToEnd')
+        // Perf4js.info(metricStartPayload, metricTimeDiffFromDropoffToEnd, 'metricTimeDiffFromDropoffToEnd')
       }
       var metricEndNow = (new Date()).getTime()
       var metricEndOfCallBack = metricEndNow - metricStartNow
-      Perf4js.info(metricStartNow, metricEndOfCallBack, 'metricEndOfCallBack')
+      Perf4js.info(id, metricEndOfCallBack, 'metricEndOfCallBack')
+      // Perf4js.info(metricStartNow, metricEndOfCallBack, 'metricEndOfCallBack')
       resolve(true)
     } else {
       resolve(false)
@@ -93,4 +120,12 @@ const obsTimerfyConsumeFunction1 = new PerformanceObserver((list) => {
 });
 obsTimerfyConsumeFunction1.observe({ entryTypes: ['function'] });
 
-var c1 = KafkaHelper.createConsumer(topics1, timerfyConsumeFunction1, config1)
+// var c1 = KafkaHelper.createConsumer(topics1, timerfyConsumeFunction1, config1)
+
+// c1 = KafkaHelper.createConsumer(topics1, timerfyConsumeFunction1, config1)
+
+const startKafkaConsume = async () => {
+  c1 = await KafkaHelper.createConsumer(topics1, timerfyConsumeFunction1, config1)
+}
+
+startKafkaConsume().then( ()=>{ Logger.info('yes') })
