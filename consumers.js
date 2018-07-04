@@ -128,4 +128,4 @@ const startKafkaConsume = async () => {
   c1 = await KafkaHelper.createConsumer(topics1, timerfyConsumeFunction1, config1)
 }
 
-startKafkaConsume().then( ()=>{ Logger.info('yes') })
+startKafkaConsume().then( ()=>{ Logger.info('Consumer created...') })
