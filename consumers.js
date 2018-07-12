@@ -33,7 +33,8 @@ const consumeFunction1 = async (error, messages) => {
         Logger.info(`Processing a message batch of size ${messages.length}`)
         for( let message of messages) {
           id = message.value.content.id
-          c1.commitMessageSync(message)
+          // c1.commitMessage(message)
+          // c1.commitMessageSync(message)
           var metricStartPayload = parseInt(message.value.content.metrics.start)
           var metricStartKafkaRead = parseInt(message.timestamp)
 
@@ -69,8 +70,8 @@ const consumeFunction1 = async (error, messages) => {
         // })
       } else {
         var message = messages
-        // c.commitMessage(message)
-        c1.commitMessageSync(message)
+        // c1.commitMessage(message)
+        // c1.commitMessageSync(message)
         Logger.info(`Processing a single message`)
         var metricStartPayload = parseInt(message.value.content.metrics.start)
         var metricStartKafkaRead = parseInt(message.timestamp)

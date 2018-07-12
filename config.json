@@ -8,7 +8,7 @@
     {
       "options": {
         "mode": 2,
-        "batchSize": 10,
+        "batchSize": 100,
         "recursiveTimeout": 10,
         "pollFrequency": 0,
         "messageCharset": "utf8",
@@ -22,7 +22,8 @@
         "metadata.broker.list": "localhost:9092",
         "queue.buffering.max.messages": 100,
         "queue.buffering.max.ms": 50,
-        "enable.auto.commit": false
+        "enable.auto.commit": false,
+        "auto.commit.interval.ms": 5000
       },
       "rdkafkaConf": {
         "client.id": "consumer1",
@@ -30,7 +31,8 @@
         "metadata.broker.list": "localhost:9092",
         "queue.buffering.max.messages": 1000,
         "queue.buffering.max.ms": 1,
-        "enable.auto.commit": false,
+        "enable.auto.commit": true,
+        "auto.commit.interval.ms": 200,
         "api.version.request": false,
         "fetch.wait.max.ms": 1,
         "fetch.error.backoff.ms": 1,
