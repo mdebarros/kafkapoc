@@ -41,9 +41,11 @@ const consumeFunction1 = async (error, messages) => {
           var metricEndNow = (new Date()).getTime()
           Logger.info(`guid=${id}:uuid - receivedMessage:process - start`)
 
-          // Comment out both lines if you do not wish to manual commit. Also ensure that you enable `"enable.auto.commit": true` in the config if you disable both lines
-          // c1.commitMessage(message)
-          c1.commitMessageSync(message)
+          if(!config1.rdkafkaConf['enable.auto.commit']) {
+            // Comment out both lines if you do not wish to manual commit. Also ensure that you enable `"enable.auto.commit": true` in the config if you disable both lines
+            // c1.commitMessage(message)
+            c1.commitMessageSync(message)
+          }
 
           var metricTimeDiffFromMessageSendToEnd = metricEndNow - metricStartPayload
           var metricTimeDiffFromMessageSendToDropoff = metricStartKafkaRead - metricStartPayload
@@ -84,9 +86,11 @@ const consumeFunction1 = async (error, messages) => {
         var metricEndNow = (new Date()).getTime()
         Logger.info(`guid=${id}:uuid - receivedMessage:process - start`)
 
-        // Comment out both lines if you do not wish to manual commit. Also ensure that you enable `"enable.auto.commit": true` in the config if you disable both lines
-        // c1.commitMessage(message)
-        c1.commitMessageSync(message)
+        if(!config1.rdkafkaConf['enable.auto.commit']) {
+          // Comment out both lines if you do not wish to manual commit. Also ensure that you enable `"enable.auto.commit": true` in the config if you disable both lines
+          // c1.commitMessage(message)
+          c1.commitMessageSync(message)
+        }
 
         var metricTimeDiffFromMessageSendToEnd = metricEndNow - metricStartPayload
         var metricTimeDiffFromMessageSendToDropoff = metricStartKafkaRead - metricStartPayload
