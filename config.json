@@ -6,9 +6,9 @@
   },
   "consumers": [
     {
-      "options": {
+      "options.preNov2018": {
         "mode": 2,
-        "batchSize": 100,
+        "batchSize": 1,
         "recursiveTimeout": 10,
         "pollFrequency": 0,
         "messageCharset": "utf8",
@@ -25,7 +25,7 @@
         "enable.auto.commit": false,
         "auto.commit.interval.ms": 5000
       },
-      "rdkafkaConf": {
+      "rdkafkaConf.preNov2018": {
         "client.id": "consumer1",
         "group.id": "group1",
         "metadata.broker.list": "localhost:9092",
@@ -38,6 +38,31 @@
         "fetch.error.backoff.ms": 1,
         "broker.version.fallback": "0.10.1.0",
         "socket.blocking.max.ms": 1
+      },
+      "options": {
+        "mode": 2,
+        "batchSize": 1,
+        "recursiveTimeout": 100,
+        "pollFrequency": 0,
+        "messageCharset": "utf8",
+        "messageAsJSON": true,
+        "sync": true,
+        "consumeTimeout": 1000
+      },
+      "rdkafkaConf": {
+        "client.id": "consumer1",
+        "group.id": "group1",
+        "debug": "all",
+        "metadata.broker.list": "localhost:9092",
+        "socket.blocking.max.ms": 1,
+        "fetch.wait.max.ms": 100,
+        "fetch.error.backoff.ms": 1,
+        "queue.buffering.max.ms": 1,
+        "broker.version.fallback": "0.10.1.0",
+        "api.version.request": true,
+        "enable.auto.commit": false,
+        "auto.commit.interval.ms": 200,
+        "partition.assignment.strategy": "range"
       },
       "topicConf": {
         "auto.offset.reset": "beginning"
