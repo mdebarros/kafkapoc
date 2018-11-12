@@ -39,7 +39,7 @@ const consumeFunction1 = async (error, messages) => {
           var metricStartKafkaRead = parseInt(message.timestamp)
 
           var metricEndNow = (new Date()).getTime()
-          Logger.info(`guid=${id}:uuid - receivedMessage:process`)
+          Logger.info(`guid=${id}:uuid - receivedMessage:process - start`)
 
           var metricTimeDiffFromMessageSendToEnd = metricEndNow - metricStartPayload
           var metricTimeDiffFromMessageSendToDropoff = metricStartKafkaRead - metricStartPayload
@@ -51,6 +51,7 @@ const consumeFunction1 = async (error, messages) => {
           // Perf4js.info(metricStartPayload, metricTimeDiffFromMessageSendToDropoff, 'metricTimeDiffFromMessageSendToDropoff')
           // Perf4js.info(metricStartPayload, metricTimeDiffFromMessageSendToEnd, 'metricTimeDiffFromMessageSendToEnd')
           // Perf4js.info(metricStartPayload, metricTimeDiffFromDropoffToEnd, 'metricTimeDiffFromDropoffToEnd')
+          Logger.info(`guid=${id}:uuid - receivedMessage:process - end`)
         }
         // messages.forEach(message => {
         //   // c.commitMessage(msg)
@@ -70,13 +71,18 @@ const consumeFunction1 = async (error, messages) => {
         // })
       } else {
         var message = messages
-        // c1.commitMessage(message)
-        // c1.commitMessageSync(message)
+        id = message.value.content.id
+
         Logger.info(`Processing a single message`)
         var metricStartPayload = parseInt(message.value.content.metrics.start)
         var metricStartKafkaRead = parseInt(message.timestamp)
 
         var metricEndNow = (new Date()).getTime()
+        Logger.info(`guid=${id}:uuid - receivedMessage:process - start`)
+
+        // Comment out both lines if you do not wish to manual commit. Also ensure that you enable `"enable.auto.commit": true` in the config if you disable both lines
+        // c1.commitMessage(message)
+        c1.commitMessageSync(message)
 
         var metricTimeDiffFromMessageSendToEnd = metricEndNow - metricStartPayload
         var metricTimeDiffFromMessageSendToDropoff = metricStartKafkaRead - metricStartPayload
@@ -88,6 +94,7 @@ const consumeFunction1 = async (error, messages) => {
         // Perf4js.info(metricStartPayload, metricTimeDiffFromMessageSendToDropoff, 'metricTimeDiffFromMessageSendToDropoff')
         // Perf4js.info(metricStartPayload, metricTimeDiffFromMessageSendToEnd, 'metricTimeDiffFromMessageSendToEnd')
         // Perf4js.info(metricStartPayload, metricTimeDiffFromDropoffToEnd, 'metricTimeDiffFromDropoffToEnd')
+        Logger.info(`guid=${id}:uuid - receivedMessage:process - end`)
       }
       var metricEndNow = (new Date()).getTime()
       var metricEndOfCallBack = metricEndNow - metricStartNow

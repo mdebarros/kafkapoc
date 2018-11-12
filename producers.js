@@ -31,11 +31,12 @@ var runProducer = async (messageNum = 1) => {
       id: i+1,
       start: (new Date()).getTime()
     }
-    Logger.info(`guid=${messageValues.id}:uuid - sendingMessage:process`)
+    Logger.info(`guid=${messageValues.id}:uuid - sendingMessage:process - START`)
     var message= JSON.parse(Mustache.render(Config.templates.messages[0], messageValues))
     Logger.info(`Sending message ${messageValues.id} - ${JSON.stringify(message)}`)
     var result = await p1.sendMessage(message, topicConf)
     Logger.info(`Message[${messageValues.id}] sent with result: ${result}`)
+    Logger.info(`guid=${messageValues.id}:uuid - sendingMessage:process - END`)
   }
   var metricForEndNow = (new Date()).getTime()
   var metricTimeProducerForLoop = metricForEndNow - metricForStartNow

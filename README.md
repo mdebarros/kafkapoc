@@ -56,6 +56,12 @@ Edit the `perfEnv.sh` file.
 
 `perfPrintProducerResults.sh`: Script to print Per4j output for the Producer
 
+`perfPrintProcessConsumerResults.sh`: Script to print loadTestingParser TPS report for Consumer
+
+`perfPrintProcessProducerResults.sh`: Script to print loadTestingParser TPS report for Producer
+
+`perfPrintProcessResults.sh`: Script to print loadTestingParser TPS report for combined end-to-end Producer & Consumer
+
 #### 4. Tick Processor to understand the Profiler dump
 
 Run the following command on the Profiler dump:
@@ -74,6 +80,30 @@ Commands:
 - `$ npm install`
 - `$ cd ..`
 
+5.2. See TPS Report for Consumer
+`perfPrintProcessConsumerResults.sh`
+
+5.3. See TPS Report for Producer
+`perfPrintProcessProducerResults.sh`
+
+5.4. See Combined TPS Report for end-to-end Producer & Consumer
+`perfPrintProcessResults.sh`
+
+5.5. Example output:
+```bash
+$ node ./tools/loadTestingParser.js -n 2 -f {OUTPUTFILE}
+First request: 2018-07-04T17:08:39.930Z
+Last request: 2018-07-04T17:08:43.872Z
+Total number of lines in log file: 2000
+Number of unique matched entries: 1000
+Total difference of all requests in seconds: 3.942
+Shortest response time in second: 0.215
+Longest response time in second: 3.156
+The average transaction in second: 1.621445
+Average transactions per second: 253.67833587011668
+```
+
+<!--
 5.2. Combined Producer and Consumer logs into sorted and filtered output: 
 
 Command:
@@ -97,6 +127,7 @@ Longest response time in second: 3.156
 The average transaction in second: 1.621445
 Average transactions per second: 253.67833587011668
 ```
+-->
 
 ### References
 
