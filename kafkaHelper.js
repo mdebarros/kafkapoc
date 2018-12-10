@@ -1,7 +1,7 @@
 'use strict'
 
-const Consumer = require('@mojaloop/central-services-shared').Kafka.Consumer
-const Producer = require('@mojaloop/central-services-shared').Kafka.Producer
+const Consumer = require('@mojaloop/central-services-stream').Kafka.Consumer
+const Producer = require('@mojaloop/central-services-stream').Kafka.Producer
 // const ConsumerEnums = require('@mojaloop/central-services-shared').Kafka.Consumer.ENUMS
 const Logger = require('@mojaloop/central-services-shared').Logger
 
