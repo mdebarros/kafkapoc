@@ -18,7 +18,7 @@
   "homepage": "https://github.com/mdebarros/kafkapoc#readme",
   "dependencies": {
     "@mojaloop/central-services-shared": "4.1.0-snapshot",
-    "@mojaloop/central-services-stream": "4.3.4-performance",
+    "@mojaloop/central-services-stream": "4.3.5-performance",
     "microseconds": "^0.1.0",
     "mustache": "^2.3.2",
     "uuid": "^3.3.2"
