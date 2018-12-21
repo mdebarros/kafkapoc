@@ -1,6 +1,7 @@
 'use strict'
 
-const Consumer = require('@mojaloop/central-services-stream').Kafka.Consumer
+// const Consumer = require('@mojaloop/central-services-stream').Kafka.Consumer
+const KafkaPoC = require('@mojaloop/central-services-stream').Poc
 const Producer = require('@mojaloop/central-services-stream').Kafka.Producer
 // const ConsumerEnums = require('@mojaloop/central-services-shared').Kafka.Consumer.ENUMS
 const Logger = require('@mojaloop/central-services-shared').Logger
@@ -12,16 +13,16 @@ const createConsumer = async (topicList, consumeFunction, config) => {
   // set the logger
   config.logger = Logger
 
-  var c = new Consumer(topicList, config)
+  var c = KafkaPoC.createConsumer(topicList, config, consumeFunction)
 
-  Logger.info('createConsumer::- Connecting...')
-  var connectionResult = await c.connect()
+  // Logger.info('createConsumer::- Connecting...')
+  // var connectionResult = await c.connect()
 
-  Logger.info(`createConsumer::- Connected result=${connectionResult}`)
+  // Logger.info(`createConsumer::- Connected result=${connectionResult}`)
 
-  Logger.debug('createConsumer::- Consume messages')
+  // Logger.debug('createConsumer::- Consume messages')
 
-  c.consume(consumeFunction)
+  // c.consume(consumeFunction)
 
   // // consume 'ready' event
   // c.on('ready', arg => console.log(`onReady: ${JSON.stringify(arg)}`))
